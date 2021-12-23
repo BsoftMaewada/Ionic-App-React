@@ -6,7 +6,7 @@ import {
   IonTitle,
   IonToolbar,
   IonIcon,
-  // adding
+  // added
   IonGrid,
   IonRow,
   IonFab,
@@ -24,7 +24,7 @@ import { usePhotoGallery } from '../hooks/usePhotoGallery';
 
 const Tab2: React.FC = () => {
   // get access to the takePhoto method
-  const { takePhoto } = usePhotoGallery();
+  const { takePhoto, photos } = usePhotoGallery();
 
   return (
     <IonPage>
@@ -34,6 +34,16 @@ const Tab2: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        {/* Grid component so each photos are added nicely to the gallery */}
+        <IonGrid>
+          <IonRow>
+            {photos.map((photo, index) => {
+              <IonCol size='6' key={index}>
+                <IonImg src={photo.webviewPath} />
+              </IonCol>
+            })}
+          </IonRow>
+        </IonGrid>
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton onClick={() => takePhoto()}>
             <IonIcon icon={camera}></IonIcon>
